@@ -8,7 +8,8 @@ mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
 
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
-const uri = 'mongodb+srv://mb:toto@cluster0.5e6cs7n.mongodb.net/assignments?retryWrites=true&w=majority';
+// const uri = 'mongodb+srv://mb:toto@cluster0.5e6cs7n.mongodb.net/assignments?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://root:root@mycluster.qgv6h72.mongodb.net/assignments';
 
 const options = {
   useNewUrlParser: true,
@@ -51,7 +52,6 @@ app.route(prefix + '/assignments')
 app.route(prefix + '/assignments/:id')
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
-  
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

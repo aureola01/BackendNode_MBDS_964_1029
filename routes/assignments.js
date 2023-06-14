@@ -31,11 +31,16 @@ function getAssignments(req, res) {
 // Récupérer un assignment par son id (GET)
 function getAssignment(req, res){
     let assignmentId = req.params.id;
-
+    console.log("id assignment = "+assignmentId);
     Assignment.findOne({id: assignmentId}, (err, assignment) =>{
-        if(err){res.send(err)}
+        console.log(assignment);
+        if(err){
+            console.log(err)
+            res.send(err)
+        }
         res.json(assignment);
     })
+    console.log("get assignment by id " + res);
 }
 
 // Ajout d'un assignment (POST)
