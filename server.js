@@ -2,7 +2,8 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
-
+let user = require('./routes/user');
+let middleware = require('./routes/middleware');
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
@@ -14,7 +15,7 @@ const uri = 'mongodb+srv://root:root@mycluster.qgv6h72.mongodb.net/assignments';
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify:false
+  useFindAndModify: false
 };
 
 mongoose.connect(uri, options)
@@ -22,7 +23,7 @@ mongoose.connect(uri, options)
     console.log("Connecté à la base MongoDB assignments dans le cloud !");
     console.log("at URI = " + uri);
     console.log("vérifiez with http://localhost:8010/api/assignments que cela fonctionne")
-    },
+  },
     err => {
       console.log('Erreur de connexion: ', err);
     });
@@ -36,13 +37,19 @@ app.use(function (req, res, next) {
 });
 
 // Pour les formulaires
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Middleware d'authentification
+app.use(middleware.authMiddleware);
 
 let port = process.env.PORT || 8010;
 
 // les routes
 const prefix = '/api';
+
+app.route(prefix + '/login')
+  .post(user.login)
 
 app.route(prefix + '/assignments')
   .get(assignment.getAssignments)
