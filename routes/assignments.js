@@ -21,10 +21,11 @@ function getAssignments(req, res) {
         },
         (err, assignments) => {
             if (err) {
-                res.send(err);
+                console.log("err getAss"+err);
+                res.status(500).send(err);
             }
             console.log(assignments)
-            res.send(assignments);
+            res.status(200).send(assignments);
         }
     );
 }
@@ -37,9 +38,9 @@ function getAssignment(req, res) {
         console.log(assignment);
         if (err) {
             console.log(err)
-            res.send(err)
+            res.status(500).send(err)
         }
-        res.json(assignment);
+        res.status(200).json(assignment);
     })
     console.log("get assignment by id " + res);
 }
@@ -48,18 +49,24 @@ function getAssignment(req, res) {
 function postAssignment(req, res) {
     let assignment = new Assignment();
     assignment.id = req.body.id;
-    assignment.nom = req.body.nom;
-    assignment.dateDeRendu = req.body.dateDeRendu;
-    assignment.rendu = req.body.rendu;
+    assignment.title = req.body.title;
+    assignment.rendered = req.body.rendered;
+    assignment.author = req.body.author;
+    assignment.subject = req.body.subject;
+    assignment.rating = req.body.rating;
+    assignment.remarks = req.body.remarks;
+    assignment.deadline = req.body.deadline;
 
     console.log("POST assignment reçu :");
     console.log(assignment)
+    console.log("deadline"+req.body.deadline)
+    console.log("deadlineDate"+assignment.deadline)
 
     assignment.save((err) => {
         if (err) {
-            res.send('cant post assignment ', err);
+            res.status(500).send('cant post assignment '+ err);
         }
-        res.json({ message: `${assignment.nom} saved!` })
+        res.json({ message: `${assignment.title} saved!` })
     })
 }
 
@@ -73,7 +80,7 @@ function updateAssignment(req, res) {
             console.log(err);
             res.send(err)
         } else {
-            res.json({ message: assignment.nom + 'updated' })
+            res.status(200).json({ message: assignment.title + 'updated' })
         }
 
         // console.log('updated ', assignment)
@@ -88,7 +95,7 @@ function deleteAssignment(req, res) {
         if (err) {
             res.send(err);
         }
-        res.json({ message: `${assignment.nom} deleted` });
+        res.json({ message: `${assignment.title} deleted` });
     })
 }
 
