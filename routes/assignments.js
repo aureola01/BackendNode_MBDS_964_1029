@@ -23,6 +23,7 @@ function getAssignments(req, res) {
             if (err) {
                 res.send(err);
             }
+            console.log(assignments)
             res.send(assignments);
         }
     );

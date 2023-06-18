@@ -4,7 +4,8 @@ let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
 let user = require('./routes/user');
 let middleware = require('./routes/middleware');
-let mongoose = require('mongoose');
+let mongoose = require('mongoose')
+let cors = require('cors');;
 mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
 
@@ -29,13 +30,7 @@ mongoose.connect(uri, options)
     });
 
 // Pour accepter les connexions cross-domain (CORS)
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
-
+app.use(cors())
 // Pour les formulaires
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
