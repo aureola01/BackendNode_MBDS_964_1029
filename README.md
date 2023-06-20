@@ -3,7 +3,9 @@
 AH-THAN FIOMBONANA Marie Auréola .Numéro: 01  
 RANDRIAMIHANTA Ny Aina Fanilo .Numéro: 43  
 
-Le backend est hebergé sur render.com : https://backend-mbds-964-1029.onrender.com/  
+Les membres de l'équipe s'est distribué les taches et ont chacun participé grandement dans la réalisation du projet.  
+
+La partie backend est hebergé sur render.com : https://backend-mbds-964-1029.onrender.com/  
 Les diffenrents endpoints des APIs sont visibles dans le code.  
 
 Voici le lien pour se connecter à la base de données Mongo via MongoDb compass: mongodb+srv://root:root@mycluster.qgv6h72.mongodb.net/admin?authSource=admin&replicaSet=atlas-7m7y9r-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true  
